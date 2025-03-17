@@ -4,9 +4,9 @@ A repository for code related to a project about signal. You can read a short sy
 
 ## What's Inside 
 At the time of writing, the document contains a few files:
-    * message generation to model communication in a social network: [`rfmp_msg_gen.py`](#https://github.com/nokoyoko/SignalSimulator/blob/main/rfmp_msg_gen.py)
-    * a standard attack script, to be modified for different settings: [`notime_cor_attack_variable_flurries_standard.py`](#notime_cor_attack_variable_flurries_standard)
-    * a script to generate different social graphs for all testing environments: [`graph_gen_master_realistic.py`](#https://github.com/nokoyoko/SignalSimulator/blob/main/graph_gen_master_realistic.py)
+    * message generation to model communication in a social network: [`rfmp_msg_gen.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/rfmp_msg_gen.py)
+    * a standard attack script, to be modified for different settings: [`notime_cor_attack_variable_flurries_standard.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/notime_cor_attack_variable_flurries_standard.py)
+    * a script to generate different social graphs for all testing environments: [`graph_gen_master_realistic.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/graph_gen_master_realistic.py)
     * other files containing data necessary to support the above
 
 ## What's Coming Next
