@@ -7,7 +7,7 @@ The files are as follows:
 * message generation to model communication in a social network: [`rfmp_msg_gen.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/rfmp_msg_gen.py)
 * a standard attack script, to be modified for different settings: [`updated_attack.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/updated_attack.py)
 * a script to generate different social graphs for all testing environments: [`graph_gen_master_realistic.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/graph_gen_master_realistic.py)
-* group member files to create realistic groups: [`group_member_counts.tsv`](https://github.com/nokoyoko/SignalSimulator/blob/main/group_member_counts.tsv) -- the paper which this data was obtained for may be found [here](https://gvrkiran.github.io/content/whatsapp.pdf)
+* group member files to create realistic groups: [`group_member_counts.tsv`](https://github.com/nokoyoko/SignalSimulator/blob/main/group_member_counts.tsv) -- the paper which this data was obtained from may be found [here](https://gvrkiran.github.io/content/whatsapp.pdf)
 
 ## How to Use It
 The following command is an example to call the code:
