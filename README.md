@@ -10,7 +10,11 @@ The files are as follows:
 * group member files to create realistic groups: [`group_member_counts.tsv`](https://github.com/nokoyoko/SignalSimulator/blob/main/group_member_counts.tsv) -- the paper which this data was obtained from may be found [here](https://gvrkiran.github.io/content/whatsapp.pdf)
 
 ## How to Use It
-The following command is an example to call the code:
+Prior to working with the code, the social graphs need to be made. This may be done by the following command:
+
+python3 graph_gen_master_realistic.py
+
+The following command is an example to call the code for a particular experiment:
 
 nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &
 
@@ -25,7 +29,7 @@ Relevant Syntax:
 
 
 ## What's Coming Next
-Ther are no concrete plans to advance the project as of now. More sophisticated defenses would be interesting to explore however. If you are interested in collaborating please feel free to contact me. 
+There are no concrete plans to advance the project as of now. More sophisticated defenses would be interesting to explore. If you are interested in collaborating please feel free to contact me. 
 
 ## Contact
 eric (dot) brigham4 (at) gmail.com
