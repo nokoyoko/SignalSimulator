@@ -1,19 +1,34 @@
 # SignalSimulator
 
-A repository for code related to a project about signal. You can read a short synopsis of the project and it's goals [here](https://arxiv.org/pdf/2305.09799).
+A repository for code related to a project about signal. You can read a short synopsis of the project and it's goals [here](https://arxiv.org/pdf/2305.09799). It has now been accepted for publication -- the link will be provided when it is available in full. 
 
 ## What's Inside 
-At the time of writing, the document contains a few files:
+The files are as follows:
 * message generation to model communication in a social network: [`rfmp_msg_gen.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/rfmp_msg_gen.py)
-* a standard attack script, to be modified for different settings: [`notime_cor_attack_variable_flurries_standard.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/notime_cor_attack_variable_flurries_standard.py)
+* a standard attack script, to be modified for different settings: [`updated_attack.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/updated_attack.py)
 * a script to generate different social graphs for all testing environments: [`graph_gen_master_realistic.py`](https://github.com/nokoyoko/SignalSimulator/blob/main/graph_gen_master_realistic.py)
-* other files containing data necessary to support the above
+* group member files to create realistic groups: [`group_member_counts.tsv`](https://github.com/nokoyoko/SignalSimulator/blob/main/group_member_counts.tsv) -- the paper which this data was obtained for may be found [here](file:///Users/ericbrigham/Downloads/14989-Article%20Text-18508-1-2-20201228.pdf)
+
+## How to Use It
+The following command is an example to call the code:
+
+<style>
+     .my-font { font-family: "Courier New", monospace; }
+     </style>
+     <p class="my-font">nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &</p>
+
+Relevant Syntax:
+* --env : the desired environment e.g. standard or super user(s)
+* --graph : the social graph to execute on e.g. gMartiny, gLarge, gGeneral
+* --exp : the experiment being run, e.g. Standard, Large
+* --atk : the attack file (always use updated)
+* --mar : enable Martiny style generation/attack (not required)
+* --defs : enable the defense or not (not required, only defense is 'self') 
+* --str : strength of the attack
+
 
 ## What's Coming Next
-The project will be advanced in a number of ways:
-* Like the generation script, the attack script will be modified to be modular -- that is, it will incorporate all of the generation environments. It's current iteration only supports an attack on the standard messaging environment. While these attacks already exist, they are in separate files. Their logic will be merged into a single attack script. 
-* Graphical results of the attacks will be added as experiments are performed. 
-* Links to longer versions of the paper will be added as they come out. 
+Ther are no concrete plans to advance the project as of now. More sophisticated defenses would be interesting to explore however. If you are interested in collaborating please feel free to contact me. 
 
 ## Contact
 eric (dot) brigham4 (at) gmail.com
