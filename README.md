@@ -31,6 +31,7 @@ Relevant Syntax:
 The variables 'runs' and 'numEpochs' are hard coded in the rfmp_msg_gen.py file. They determine the following:
 * runs : the number of experiments executed in parallel. Each will be we run on a separate CPU core, so keep that in mind. 
 * numEpochs : the number of epochs to generate in each attack. 
+
 This program can consume *a lot* of memory. For example, at 20 runs and 9000 epochs, the code will consume upwards of 220G of ram. 
 
 ## What's Coming Next
