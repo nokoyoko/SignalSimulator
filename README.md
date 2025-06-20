@@ -27,6 +27,11 @@ Relevant Syntax:
 * --defs : enable the defense or not (not required, only defense is 'self') 
 * --str : strength of the attack
 
+## Some Notes
+The variables 'runs' and 'numEpochs' are hard coded in the rfmp_msg_gen.py file. They determine the following:
+* runs : the number of experiments executed in parallel. Each will be we run on a separate CPU core, so keep that in mind. 
+* numEpochs : the number of epochs to generate in each attack. 
+This program can consume *a lot* of memory. For example, at 20 runs and 9000 epochs, the code will consume upwards of 220G of ram. 
 
 ## What's Coming Next
 There are no concrete plans to advance the project as of now. More sophisticated defenses would be interesting to explore. If you are interested in collaborating please feel free to contact me. 
