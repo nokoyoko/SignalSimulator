@@ -8,7 +8,9 @@ from itertools import combinations
 # global 
 nodes = 100000
 edges = 70*nodes
-    
+
+# modified groups[test_group_id] = [0,1,2,3,4] line for large setting,
+# previously was groups[test_group_id] = [0,1,2]
 def genGroups(file_path):
     # return the group data
     groups = {}
@@ -29,10 +31,31 @@ def genGroups(file_path):
     # inject testing group
     test_group_id = max(groups.keys(), default=0) + 1
     groups[test_group_id] = [0,1,2]
+    #groups[test_group_id] = [0,1,2,3,4]
     print(f"Injected test group {test_group_id}: {groups[test_group_id]}")
     #print(f"Generated group_data: {groups}")
     print(f"Total number of groups: {len(groups)}")
     return groups, test_group_id
+
+def genMartinyGroups(file_path):
+    groups = {}
+    with open(file_path, "r") as file:
+        next(file)  # skip header
+        for line in file:
+            parts = line.strip().split()
+            if len(parts) != 2:
+                print(f"skipping line, malformed: {line.strip()}")
+                continue
+            try:
+                group_id, member_count = map(int, parts)
+                # Exclude node 0 completely
+                groups[group_id] = random.sample(range(1, nodes), member_count)
+            except ValueError:
+                print(f"skipping line, invalid numbers: {line.strip()}")
+                continue
+
+    print(f"Generated {len(groups)} Martiny groups (no node 0 involved).")
+    return groups
 
 def genIsolGroups(file_path):
     # generate groups ensuring {0,1,2} are completely isolated 
@@ -150,6 +173,18 @@ def create_gLargeSynthetic():
     g.add_edges(list(combinations({0,1,2,3,4}, 2)))
     return g
 
+def create_gMartiny(group_data, group_edges):
+    g = create_graph()
+    all_group_edges = []
+    for edges in group_edges.values():
+        all_group_edges.extend(edges)
+    g.add_edges(all_group_edges)
+    g.delete_edges(g.incident(0))
+    for k in range(3,8,1):
+        g.add_edges([(0, k)])
+        print(f"Added edge: 0 --> {k}")
+    return g
+
 def create_gLargeIsolated(group_data, group_edges):
     # create gLargeIsolated: G = L U O w/ L n O = \empty 
     g = create_graph()
@@ -255,7 +290,7 @@ def create_gOverlapTen(group_data, group_edges):
 
 def create_graph_variant(graph_func, graph_name, group_data=None, group_edges=None):
     # general function to create, verify, and save social graphs
-    if group_data is None or group_edges is None:
+    if group_data is None and group_edges is None:
         g = graph_func()
     else:
         g = graph_func(group_data, group_edges)
@@ -273,7 +308,7 @@ def create_graph_variant(graph_func, graph_name, group_data=None, group_edges=No
         print(f"{graph_name} connectivity check passed.")
     return g
 
-def main(group_data, group_edges, group_data_isol, group_edges_isol):
+def main(group_data, group_edges, group_data_isol, group_edges_isol, martiny_group_data, martiny_group_edges):
     #  U := union, n := intersection, \E := exists 
     # definitions: 
     # synthetic/injected group, I = {0,1,2} -- used for testing 
@@ -303,6 +338,7 @@ def main(group_data, group_edges, group_data_isol, group_edges_isol):
         # special cases
         "gOverlapOne": create_gOverlapOne,
         "gOverlapTen": create_gOverlapTen,
+        "gMartiny": create_gMartiny,
     }
 
     isolated_graphs = {
@@ -318,6 +354,8 @@ def main(group_data, group_edges, group_data_isol, group_edges_isol):
             graphs[name] = create_graph_variant(func, name)
         elif name in ["gOverlapOne", "gOverlapTen"]:  
             graphs[name] = create_graph_variant(func, name, group_data_isol, group_edges_isol)
+        elif name == "gMartiny":
+            graphs[name] = create_graph_variant(func, name, martiny_group_data, martiny_group_edges)
         else:
             graphs[name] = create_graph_variant(func, name, group_data, group_edges)
 
@@ -334,6 +372,8 @@ if __name__ == "__main__":
     group_data_isol, test_group_id_isol = genIsolGroups(file)
     group_edges = genGroupEdges(group_data, test_group_id)
     group_edges_isol = genIsolGroupEdges(group_data_isol, test_group_id_isol)
+    martiny_group_data = genMartinyGroups(file)
+    martiny_group_edges = genGroupEdges(martiny_group_data, None)
     print("\nStarting graph generation process...")
-    main(group_data, group_edges, group_data_isol, group_edges_isol)
+    main(group_data, group_edges, group_data_isol, group_edges_isol, martiny_group_data, martiny_group_edges)
     
