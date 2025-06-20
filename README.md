@@ -12,10 +12,7 @@ The files are as follows:
 ## How to Use It
 The following command is an example to call the code:
 
-<style>
-     .my-font { font-family: "Courier New", monospace; }
-     </style>
-     <p class="my-font">nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &</p>
+nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &
 
 Relevant Syntax:
 * --env : the desired environment e.g. standard or super user(s)
