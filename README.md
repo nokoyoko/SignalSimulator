@@ -12,25 +12,29 @@ The files are as follows:
 ## How to Use It
 Prior to working with the code, the social graphs need to be made. This may be done by the following command:
 
-python3 graph_gen_master_realistic.py
+```bash
+    python3 graph_gen_master_realistic.py
+```
 
 The following command is an example to call the code for a particular experiment:
 
-nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &
+```bash
+    nohup python3 -u rfmp_msg_gen.py --env default --graph gMartiny --exp standard --atk updated --mar true --defs self --str 5 > output_martiny_def_str5.txt &
+```
 
 Relevant Syntax:
-* --env : the desired environment e.g. standard or super user(s)
-* --graph : the social graph to execute on e.g. gMartiny, gLarge, gGeneral
-* --exp : the experiment being run, e.g. Standard, Large
-* --atk : the attack file (always use updated)
-* --mar : enable Martiny style generation/attack (not required)
-* --defs : enable the defense or not (not required, only defense is 'self') 
-* --str : strength of the attack
+* `--env` : the desired environment e.g. standard or super user(s)
+* `--graph` : the social graph to execute on e.g. gMartiny, gLarge, gGeneral
+* `--exp` : the experiment being run, e.g. Standard, Large
+* `--atk` : the attack file (always use updated)
+* `--mar` : enable Martiny style generation/attack (not required)
+* `--defs` : enable the defense or not (not required, only defense is 'self') 
+* `--str` : strength of the defense
 
 ## Some Notes
-The variables 'runs' and 'numEpochs' are hard coded in the rfmp_msg_gen.py file. They determine the following:
-* runs : the number of experiments executed in parallel. Each will be we run on a separate CPU core, so keep that in mind. 
-* numEpochs : the number of epochs to generate in each attack. 
+The variables `runs` and `numEpochs` are hard coded in the `rfmp_msg_gen.py` file. They determine the following:
+* `runs` : the number of experiments executed in parallel. Each will be we run on a separate CPU core, so keep that in mind. 
+* `numEpochs` : the number of epochs to generate in each attack. 
 
 This program can consume *a lot* of memory. For example, at 20 runs and 9000 epochs the code will consume upwards of 220G of memory. 
 
