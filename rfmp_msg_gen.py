@@ -4,20 +4,7 @@ from pickle import TRUE
 from plistlib import UID
 from igraph import *
 import json
-import attack as atk
-import cor_attack as cor_atk
-# attack imports TODO: improve this -- stretch goal
 import updated_attack
-import notime_cor_attack_variable_flurries_standard
-import notime_cor_attack_variable_flurries_large
-import notime_cor_attack_variable_flurries_popular
-import notime_cor_attack_variable_flurries_multi_popular_group_user
-import notime_cor_attack_variable_flurries_with
-import notime_cor_attack_variable_flurries_with
-import notime_cor_attack_variable_flurries_with_popular
-import notime_cor_attack_variable_flurries_multi
-import martiny_attack_recreate
-# end attack imports
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import where
@@ -421,7 +408,8 @@ def processReadReceipt(msg, rr_log, thisUID):
     thisUID += 1
     check_duplicate_uid(thisUID)
     rrMsg = {'time': msg['time'], 'type': 1, 'from': msg['to'], 'to': msg['from'], 'UID': thisUID}
-    #print(f"[DEBUG UID] Assigning UID: {thisUID} to message from {msg['from']} to {msg['to']}")
+    #print(f"[DEBUG UID] Assigning rrMsg UID: {thisUID} to message from {msg['from']} to {msg['to']} with msg UID {msg['UID']}")
+    #print(f"[DEBUG rrMsg] rrMsg Looks like: {rrMsg}")
     rr_log.append(rrMsg.copy())
     #print(f"[DEBUG UID] processReadReceipt returning UID: {thisUID}")
     return thisUID
@@ -482,10 +470,10 @@ def task(args):
     g = Graph.Read_Edgelist(graph_path)
     msgsPerEpoch = 800
     # use numEpochs to dictate the length of the test 9k ==> 20 flurries per 3 person group, 6k ==> 15 flurries per 3 person group (reliably)
-    #numEpochs = 1000
+    numEpochs = 1000
     #numEpochs = 2000
     #numEpochs = 5000
-    numEpochs = 18000
+    #numEpochs = 18000
     #numEpochs = 12000
 
     # poisson arrays
@@ -519,15 +507,6 @@ def task(args):
     # TODO: 1) modify the preamble to include attack scripts 
     #       2) modify the code after this block to be attack_module.(function)
     ATTACK_MODULES = {
-        "standard": notime_cor_attack_variable_flurries_standard,
-        "large": notime_cor_attack_variable_flurries_large,
-        "unrel_super": notime_cor_attack_variable_flurries_popular,
-        "group_super": notime_cor_attack_variable_flurries_multi_popular_group_user,
-        "multi_disjoint": notime_cor_attack_variable_flurries_with,
-        "multi_over_equal": notime_cor_attack_variable_flurries_with,
-        "mult_over_super": notime_cor_attack_variable_flurries_with_popular,
-        "multimulti": notime_cor_attack_variable_flurries_multi,
-        "martiny": martiny_attack_recreate,
         "updated": updated_attack,
     }
     # select attack module 
@@ -618,9 +597,9 @@ def main():
     flurriesToObserve = 21
     x_axis = list(range(1,flurriesToObserve,1))
     marker_size = 20
-    #runs = 1
+    runs = 1
     #runs = 5
-    runs = 10
+    #runs = 10
     #runs = 20
 
     group_file = os.path.expanduser("~/signalsim/group_member_counts.tsv")
